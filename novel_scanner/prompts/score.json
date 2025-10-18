@@ -1,0 +1,10 @@
+{
+  "name": "评分与标签",
+  "description": "根据总结结果给出评分并生成标签",
+  "system_prompt": "你是一个严谨的小说评分助手，需要根据提供的内容给出评分和标签。",
+  "user_prompt": "请根据以下内容进行评分：\n\n{{text}}\n\n{% if world_info %}参考评分标准：\n{{world_info}}\n\n{% endif %}输出格式：\n评分: X\n标签: [标签1, 标签2, 标签3]\n简评: 一段简短的评语。",
+  "metadata": {
+    "version": "1.0",
+    "author": "novel_scanner"
+  }
+}

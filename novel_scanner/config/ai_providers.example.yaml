@@ -1,0 +1,41 @@
+# AI Provider配置示例
+# 复制此文件为 ai_providers.yaml 并填入你的API密钥
+
+providers:
+  # OpenAI GPT-4
+  - name: gpt4
+    type: openai
+    model: gpt-4-turbo-preview
+    api_key_env: OPENAI_API_KEY  # 从环境变量读取
+    # api_key: "sk-..."          # 或者直接填写（不推荐）
+    base_url: https://api.openai.com/v1
+    context_length: 128000
+    rpm_limit: 500
+    max_concurrent: 5
+    priority: 1
+    retry_times: 3
+    timeout: 120
+
+  # Google Gemini
+  - name: gemini-pro
+    type: gemini
+    model: gemini-2.0-flash-exp
+    api_key_env: GEMINI_API_KEY
+    context_length: 1000000
+    rpm_limit: 60
+    max_concurrent: 10
+    priority: 2
+    retry_times: 3
+    timeout: 120
+
+  # OpenAI GPT-3.5 (备用)
+  - name: gpt35
+    type: openai
+    model: gpt-3.5-turbo
+    api_key_env: OPENAI_API_KEY
+    context_length: 16385
+    rpm_limit: 3500
+    max_concurrent: 10
+    priority: 3
+    retry_times: 3
+    timeout: 60
