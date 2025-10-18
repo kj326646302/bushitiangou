@@ -1,0 +1,45 @@
+pipeline:
+  name: "默认扫书流程"
+  metadata:
+    version: 1
+
+  stages:
+    - id: split
+      type: preprocess
+      description: "根据模型上下文自动分割文本"
+      ai_pool: ["gpt4", "gemini-pro"]
+      config:
+        chunk_overlap: 200
+        min_chunk_size: 4000
+        max_retries: 2
+
+    - id: summary
+      type: process
+      description: "对分割后的文本进行总结"
+      inputs: ["split"]
+      prompt: "summary.json"
+      ai_pool: ["gpt4", "gemini-pro"]
+      config:
+        temperature: 0.7
+        max_tokens: 2000
+        max_retries: 3
+        max_concurrent: 5
+
+    - id: merge
+      type: aggregate
+      description: "将所有总结内容整合"
+      inputs: ["summary"]
+      config:
+        strategy: "concat"
+        separator: "\n\n---\n\n"
+
+    - id: score
+      type: score
+      description: "对整合内容进行评分和打标签"
+      inputs: ["merge"]
+      prompt: "score.json"
+      ai_pool: ["gpt4"]
+      config:
+        temperature: 0.5
+        max_tokens: 800
+        max_retries: 2

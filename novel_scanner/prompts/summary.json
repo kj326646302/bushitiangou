@@ -1,0 +1,10 @@
+{
+  "name": "内容总结",
+  "description": "总结小说章节的核心内容",
+  "system_prompt": "你是一个专业的小说分析助手，擅长提取文本的核心内容和关键信息。",
+  "user_prompt": "请总结以下文本的核心内容：\n\n{{text}}\n\n{% if world_info %}参考规则：\n{{world_info}}\n\n{% endif %}要求：\n1. 提取关键情节和事件\n2. 识别主要角色和关系\n3. 总结核心冲突或主题\n4. 保持客观简洁\n\n请以结构化的方式输出总结。",
+  "metadata": {
+    "version": "1.0",
+    "author": "novel_scanner"
+  }
+}
